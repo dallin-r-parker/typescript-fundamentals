@@ -27,12 +27,13 @@ type Card = [Suit, CardNumber]
 let c: Card = [Suit.Clubs, CardNumber.Five];
 
 function createDeck(): Card[] {
-  let cards: Card[] = new Array(52);
+  let cards: Card[] = [];
   for (let s = 0; s < Object.keys(Suit).length; s += 2) {
-    for (let n = 0; n < Object.keys(CardNumber).length; n++) {
-      cards.push([s, n]);
+    for (let n = 0; n < Object.keys(CardNumber).length; n+=2) {
+      cards.push([s/2, n/2]);
     }
   }
+  return cards;
 }
 export class Dealer {
   cards: Card[] = [];
@@ -40,8 +41,11 @@ export class Dealer {
     this.cards = createDeck();
     shuffleArray(this.cards);
   }
-  dealHand(numCards: number): Card[] {
 
+  dealHand(numCards: number): Card[] {
+    if (numCards > this.getLength()) throw new Error('Not Enough Cards Left');
+    if (numCards < 0) throw new Error('PLEASE give me YOUR cards')
+    return this.cards.splice(this.getLength() - numCards, numCards);
   }
 
   getLength(): number {
@@ -49,6 +53,13 @@ export class Dealer {
   }
 
   readCard(card: Card): string {
-
+    let [suit, cardNumber] = card;
+    console.log(`small suit: ${suit}`);
+    
+    return `${CardNumber[cardNumber]} of ${Suit[suit]}`;
   }
 }
+
+const d = new Dealer();
+// console.log(d.cards);
+
