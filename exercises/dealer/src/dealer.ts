@@ -12,22 +12,43 @@ function shuffleArray(a: any[]) {
   }
 }
 
-enum Suit {
+export enum Suit {
   Clubs, Diamonds, Heards, Spades
 }
 
-enum CardValue {
+export enum CardNumber {
   Ace, Two, Three, Four, Five,
   Six, Seven, Eight, Nine, Ten,
   Jack, Queen, King
 }
 
-type Card = [Suit, CardValue]
+type Card = [Suit, CardNumber]
 
-let c: Card = [Suit.Clubs, CardValue.Five];
-console.log(c);
+let c: Card = [Suit.Clubs, CardNumber.Five];
 
+function createDeck(): Card[] {
+  let cards: Card[] = new Array(52);
+  for (let s = 0; s < Object.keys(Suit).length; s += 2) {
+    for (let n = 0; n < Object.keys(CardNumber).length; n++) {
+      cards.push([s, n]);
+    }
+  }
+}
+export class Dealer {
+  cards: Card[] = [];
+  constructor() {
+    this.cards = createDeck();
+    shuffleArray(this.cards);
+  }
+  dealHand(numCards: number): Card[] {
 
-// export class Dealer {
+  }
 
-// }
+  getLength(): number {
+    return this.cards.length;
+  }
+
+  readCard(card: Card): string {
+
+  }
+}
