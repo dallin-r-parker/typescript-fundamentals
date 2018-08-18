@@ -12,6 +12,22 @@ function shuffleArray(a: any[]) {
   }
 }
 
+enum Suit {
+  Clubs, Diamonds, Heards, Spades
+}
+
+enum CardValue {
+  Ace, Two, Three, Four, Five,
+  Six, Seven, Eight, Nine, Ten,
+  Jack, Queen, King
+}
+
+type Card = [Suit, CardValue]
+
+let c: Card = [Suit.Clubs, CardValue.Five];
+console.log(c);
+
+
 // export class Dealer {
 
 // }

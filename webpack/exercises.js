@@ -16,7 +16,9 @@ const EXERCISES = Object.freeze(
 module.exports = {
   exercisePath(env = '') {
     if (env === 'dev') env = '';
-    let exercise = env.toLowerCase();
+    let exercise = env;
+    console.log(EXERCISES.indexOf(''));
+
     if (EXERCISES.indexOf(exercise) < 0) {
       process.stderr.write([
         chalk.bgRed.white(`ERROR: Unknown exercise: "${env}"`),
